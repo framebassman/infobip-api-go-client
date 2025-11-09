@@ -6318,7 +6318,7 @@ func (r ApiCreateEmailTemplateRequest) LandingPage(landingPage string) ApiCreate
 	return r
 }
 
-func (r ApiCreateEmailTemplateRequest) Execute() (*SendResponse, *http.Response, error) {
+func (r ApiCreateEmailTemplateRequest) Execute() (*CreateEmailTemplateResponse, *http.Response, error) {
 	return r.ApiService.CreateEmailTemplateExecute(r)
 }
 
@@ -6329,12 +6329,12 @@ func (a *EmailAPIService) CreateEmailTemplate(ctx context.Context) ApiCreateEmai
 	}
 }
 
-func (a *EmailAPIService) CreateEmailTemplateExecute(r ApiCreateEmailTemplateRequest) (*SendResponse, *http.Response, error) {
+func (a *EmailAPIService) CreateEmailTemplateExecute(r ApiCreateEmailTemplateRequest) (*CreateEmailTemplateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *SendResponse
+		localVarReturnValue *CreateEmailTemplateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.CreateEmailTemplate")

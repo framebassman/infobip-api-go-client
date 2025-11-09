@@ -65,8 +65,8 @@ func TestCreateEmailTemplate(t *testing.T) {
 		EmailAPI.
 		CreateEmailTemplate(auth).
 		Name("Welcome email").
-		From("Romashov <noreply@romashov.tech>").
-		ReplyTo("support@example.com").
+		From("<FROM>").
+		ReplyTo("<REPLY_TO>").
 		Subject("Welcome to Infobip").
 		Preheader("Welcome to Infobip").
 		Html("<html><head></head><body><h2>Welcome to Infobip</h2></body></html>").
@@ -83,7 +83,7 @@ func TestCreateEmailTemplate(t *testing.T) {
 	fmt.Printf("HTTP Response Details: %+v\n", httpResponse)
 
 	// Validate response
-	if apiResponse == nil || apiResponse.Messages == nil || len(apiResponse.Messages) == 0 {
-		t.Fatalf("Invalid response: expected messages, but got: %+v", apiResponse)
+	if apiResponse == nil || apiResponse.ID == 0 || apiResponse.Name == "" {
+		t.Fatalf("Invalid response: expected id, but got: %+v", apiResponse)
 	}
 }
