@@ -1,5 +1,11 @@
 package email
 
+import (
+	"encoding/json"
+
+	. "github.com/infobip/infobip-api-go-client/v3/pkg/infobip"
+)
+
 // Attachment defines model for Attachment.
 type Attachment struct {
 	// ContentType Content type of the attachment.
@@ -20,3 +26,241 @@ type Attachment struct {
 
 // AttachmentList defines model for AttachmentList.
 type AttachmentList = []Attachment
+
+// checks if the Attachment type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Attachment{}
+
+// NewAttachment instantiates a new Attachment object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAttachment() *Attachment {
+	this := Attachment{}
+	return &this
+}
+
+// NewAttachmentWithDefaults instantiates a new Attachment object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAttachmentWithDefaults() *Attachment {
+	this := Attachment{}
+	return &this
+}
+
+// GetContentType returns the ContentType field value if set, zero value otherwise.
+func (o *Attachment) GetContentType() string {
+	if o == nil || IsNil(o.ContentType) {
+		var ret string
+		return ret
+	}
+	return *o.ContentType
+}
+
+// GetContentTypeOk returns a tuple with the ContentType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Attachment) GetContentTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.ContentType) {
+		return nil, false
+	}
+	return o.ContentType, true
+}
+
+// HasContentType returns a boolean if a field has been set.
+func (o *Attachment) HasContentType() bool {
+	if o != nil && !IsNil(o.ContentType) {
+		return true
+	}
+
+	return false
+}
+
+// SetContentType gets a reference to the given string and assigns it to the ContentType field.
+func (o *Attachment) SetContentType(v string) {
+	o.ContentType = &v
+}
+
+// GetFileName returns the FileName field value if set, zero value otherwise.
+func (o *Attachment) GetFileName() string {
+	if o == nil || IsNil(o.FileName) {
+		var ret string
+		return ret
+	}
+	return *o.FileName
+}
+
+// GetFileNameOk returns a tuple with the FileName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Attachment) GetFileNameOk() (*string, bool) {
+	if o == nil || IsNil(o.FileName) {
+		return nil, false
+	}
+	return o.FileName, true
+}
+
+// HasFileName returns a boolean if a field has been set.
+func (o *Attachment) HasFileName() bool {
+	if o != nil && !IsNil(o.FileName) {
+		return true
+	}
+
+	return false
+}
+
+// SetFileName gets a reference to the given string and assigns it to the FileName field.
+func (o *Attachment) SetFileName(v string) {
+	o.FileName = &v
+}
+
+// GetId returns the Id field value
+func (o *Attachment) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value and a boolean to check if the value has been set.
+func (o *Attachment) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *Attachment) SetId(v string) {
+	o.Id = v
+}
+
+// HasId returns true if Id is set (always true for required field)
+func (o *Attachment) HasId() bool {
+	return true
+}
+
+// GetSize returns the Size field value if set, zero value otherwise.
+func (o *Attachment) GetSize() int32 {
+	if o == nil || IsNil(o.Size) {
+		var ret int32
+		return ret
+	}
+	return *o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Attachment) GetSizeOk() (*int32, bool) {
+	if o == nil || IsNil(o.Size) {
+		return nil, false
+	}
+	return o.Size, true
+}
+
+// HasSize returns a boolean if a field has been set.
+func (o *Attachment) HasSize() bool {
+	if o != nil && !IsNil(o.Size) {
+		return true
+	}
+
+	return false
+}
+
+// SetSize gets a reference to the given int32 and assigns it to the Size field.
+func (o *Attachment) SetSize(v int32) {
+	o.Size = &v
+}
+
+// GetUrl returns the Url field value if set, zero value otherwise.
+func (o *Attachment) GetUrl() string {
+	if o == nil || IsNil(o.Url) {
+		var ret string
+		return ret
+	}
+	return *o.Url
+}
+
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Attachment) GetUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.Url) {
+		return nil, false
+	}
+	return o.Url, true
+}
+
+// HasUrl returns a boolean if a field has been set.
+func (o *Attachment) HasUrl() bool {
+	if o != nil && !IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
+func (o *Attachment) SetUrl(v string) {
+	o.Url = &v
+}
+
+func (o Attachment) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Attachment) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	// Id is required, always set
+	toSerialize["id"] = o.Id
+	if !IsNil(o.ContentType) {
+		toSerialize["contentType"] = o.ContentType
+	}
+	if !IsNil(o.FileName) {
+		toSerialize["fileName"] = o.FileName
+	}
+	if !IsNil(o.Size) {
+		toSerialize["size"] = o.Size
+	}
+	if !IsNil(o.Url) {
+		toSerialize["url"] = o.Url
+	}
+	return toSerialize, nil
+}
+
+type NullableAttachment struct {
+	value *Attachment
+	isSet bool
+}
+
+func (v NullableAttachment) Get() *Attachment {
+	return v.value
+}
+
+func (v *NullableAttachment) Set(val *Attachment) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableAttachment) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableAttachment) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableAttachment(val *Attachment) *NullableAttachment {
+	return &NullableAttachment{value: val, isSet: true}
+}
+
+func (v NullableAttachment) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableAttachment) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
