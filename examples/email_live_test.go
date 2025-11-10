@@ -156,3 +156,32 @@ func TestGetEmailTemplate(t *testing.T) {
 		t.Fatalf("Invalid response: expected id, but got: %+v", apiResponse)
 	}
 }
+
+func TestDeleteEmailTemplate(t *testing.T) {
+	configuration := infobip.NewConfiguration()
+	configuration.Host = "<YOUR_BASE_URL>"
+
+	infobipClient := api.NewAPIClient(configuration)
+
+	auth := context.WithValue(
+		context.Background(),
+		infobip.ContextAPIKeys,
+		map[string]infobip.APIKey{
+			"APIKeyHeader": {Key: "<YOUR_API_KEY>", Prefix: "<API_PREFIX>"},
+		},
+	)
+
+	httpResponse, err := infobipClient.
+		EmailAPI.
+		RemoveEmailTemplate(auth).
+		ID(205000000016538).
+		Execute()
+
+	// Check for errors
+	if err != nil {
+		t.Fatalf("Failed to remove Email template: %v", err) // Fail the test with the error message
+	}
+
+	// Output response details for debugging
+	fmt.Printf("HTTP Response Details: %+v\n", httpResponse)
+}
