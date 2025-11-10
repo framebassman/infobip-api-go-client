@@ -1,4 +1,4 @@
-module github.com/infobip/infobip-api-go-client/v3
+module github.com/framebassman/infobip-api-go-client/v3
 
 go 1.18
 
