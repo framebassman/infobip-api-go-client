@@ -18,8 +18,8 @@ import (
 	"net/url"
 	"reflect"
 
-	. "github.com/infobip/infobip-api-go-client/v3/pkg/infobip"
-	. "github.com/infobip/infobip-api-go-client/v3/pkg/infobip/models/sms"
+	. "github.com/framebassman/infobip-api-go-client/v3/pkg/infobip"
+	. "github.com/framebassman/infobip-api-go-client/v3/pkg/infobip/models/sms"
 )
 
 // SmsAPIService SmsAPI service

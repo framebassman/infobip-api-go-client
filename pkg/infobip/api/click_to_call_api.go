@@ -17,8 +17,8 @@ import (
 	"net/http"
 	"net/url"
 
-	. "github.com/infobip/infobip-api-go-client/v3/pkg/infobip"
-	. "github.com/infobip/infobip-api-go-client/v3/pkg/infobip/models/voice"
+	. "github.com/framebassman/infobip-api-go-client/v3/pkg/infobip"
+	. "github.com/framebassman/infobip-api-go-client/v3/pkg/infobip/models/voice"
 )
 
 // ClickToCallAPIService ClickToCallAPI service

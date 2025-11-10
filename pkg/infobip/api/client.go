@@ -32,7 +32,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	. "github.com/infobip/infobip-api-go-client/v3/pkg/infobip"
+	. "github.com/framebassman/infobip-api-go-client/v3/pkg/infobip"
 )
 
 var (

@@ -16,7 +16,7 @@ import (
 
 	"gopkg.in/validator.v2"
 
-	. "github.com/infobip/infobip-api-go-client/v3/pkg/infobip"
+	. "github.com/framebassman/infobip-api-go-client/v3/pkg/infobip"
 )
 
 // BaseFailover - Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. Make sure to provide correct sender and destinations specified as `Channels Destination` for each channel.

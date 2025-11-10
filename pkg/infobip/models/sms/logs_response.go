@@ -13,7 +13,7 @@ package sms
 import (
 	"encoding/json"
 
-	. "github.com/infobip/infobip-api-go-client/v3/pkg/infobip"
+	. "github.com/framebassman/infobip-api-go-client/v3/pkg/infobip"
 )
 
 // checks if the LogsResponse type satisfies the MappedNullable interface at compile time

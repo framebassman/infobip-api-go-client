@@ -18,8 +18,8 @@ import (
 	"net/url"
 	"strings"
 
-	. "github.com/infobip/infobip-api-go-client/v3/pkg/infobip"
-	. "github.com/infobip/infobip-api-go-client/v3/pkg/infobip/models/moments"
+	. "github.com/framebassman/infobip-api-go-client/v3/pkg/infobip"
+	. "github.com/framebassman/infobip-api-go-client/v3/pkg/infobip/models/moments"
 )
 
 // FormsAPIService FormsAPI service

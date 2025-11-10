@@ -16,7 +16,7 @@ import (
 
 	"gopkg.in/validator.v2"
 
-	. "github.com/infobip/infobip-api-go-client/v3/pkg/infobip"
+	. "github.com/framebassman/infobip-api-go-client/v3/pkg/infobip"
 )
 
 // ScriptInner - struct for ScriptInner
