@@ -88,7 +88,7 @@ func TestCreateEmailTemplate(t *testing.T) {
 	}
 }
 
-func TestGetEmailTemplates(t *testing.T) {
+func TestGetAllEmailTemplates(t *testing.T) {
 	configuration := infobip.NewConfiguration()
 	configuration.Host = "<YOUR_BASE_URL>"
 
@@ -104,7 +104,42 @@ func TestGetEmailTemplates(t *testing.T) {
 
 	apiResponse, httpResponse, err := infobipClient.
 		EmailAPI.
-		GetEmailTemplates(auth).
+		GetAllEmailTemplates(auth).
+		Execute()
+
+	// Check for errors
+	if err != nil {
+		t.Fatalf("Failed to create Email template: %v", err) // Fail the test with the error message
+	}
+
+	// Output response details for debugging
+	fmt.Printf("Response: %+v\n", apiResponse)
+	fmt.Printf("HTTP Response Details: %+v\n", httpResponse)
+
+	// Validate response
+	if apiResponse == nil {
+		t.Fatalf("Invalid response: expected id, but got: %+v", apiResponse)
+	}
+}
+
+func TestGetEmailTemplate(t *testing.T) {
+	configuration := infobip.NewConfiguration()
+	configuration.Host = "<YOUR_BASE_URL>"
+
+	infobipClient := api.NewAPIClient(configuration)
+
+	auth := context.WithValue(
+		context.Background(),
+		infobip.ContextAPIKeys,
+		map[string]infobip.APIKey{
+			"APIKeyHeader": {Key: "<YOUR_API_KEY>", Prefix: "<API_PREFIX>"},
+		},
+	)
+
+	apiResponse, httpResponse, err := infobipClient.
+		EmailAPI.
+		GetEmailTemplate(auth).
+		ID(205000000016538).
 		Execute()
 
 	// Check for errors

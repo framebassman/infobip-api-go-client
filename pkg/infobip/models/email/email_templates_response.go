@@ -4,5 +4,5 @@ package email
 type EmailTemplatesResponse struct {
 	Paging *Paging
 	// List of domains that belong to the account.
-	Results []EmailTemplateResponse
+	Results []EmailTemplateListItem
 }

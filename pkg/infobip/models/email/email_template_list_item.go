@@ -9,13 +9,16 @@ import (
 // EmailTemplateListItem struct for EmailTemplateListItem
 type EmailTemplateListItem struct {
 	// Template ID
-	Id *string `json:"id,omitempty"`
+	Id *int64 `json:"id,omitempty"`
 
 	// Template name
 	Name *string `json:"name,omitempty"`
 
 	// Template subject
 	Subject *string `json:"subject,omitempty"`
+
+	// Template HTML body
+	Body *string `json:"body,omitempty"`
 
 	// Language of the template (optional)
 	Language *string `json:"language,omitempty"`
@@ -37,16 +40,16 @@ func NewEmailTemplateListItemWithDefaults() *EmailTemplateListItem {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *EmailTemplateListItem) GetId() string {
+func (o *EmailTemplateListItem) GetId() int64 {
 	if o == nil || IsNil(o.Id) {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.Id
 }
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
-func (o *EmailTemplateListItem) GetIdOk() (*string, bool) {
+func (o *EmailTemplateListItem) GetIdOk() (*int64, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -59,7 +62,7 @@ func (o *EmailTemplateListItem) HasId() bool {
 }
 
 // SetId sets field value
-func (o *EmailTemplateListItem) SetId(v string) {
+func (o *EmailTemplateListItem) SetId(v int64) {
 	o.Id = &v
 }
 
@@ -117,6 +120,33 @@ func (o *EmailTemplateListItem) SetSubject(v string) {
 	o.Subject = &v
 }
 
+// GetBody returns the Body field value if set, zero value otherwise.
+func (o *EmailTemplateListItem) GetBody() string {
+	if o == nil || IsNil(o.Body) {
+		var ret string
+		return ret
+	}
+	return *o.Body
+}
+
+// GetBodyOk returns a tuple with the Body field value if set, nil otherwise
+func (o *EmailTemplateListItem) GetBodyOk() (*string, bool) {
+	if o == nil || IsNil(o.Body) {
+		return nil, false
+	}
+	return o.Body, true
+}
+
+// HasBody returns a boolean if a field has been set.
+func (o *EmailTemplateListItem) HasBody() bool {
+	return o != nil && !IsNil(o.Body)
+}
+
+// SetBody sets field value
+func (o *EmailTemplateListItem) SetBody(v string) {
+	o.Body = &v
+}
+
 // GetLanguage returns the Language field value if set, zero value otherwise.
 func (o *EmailTemplateListItem) GetLanguage() string {
 	if o == nil || IsNil(o.Language) {
@@ -162,6 +192,9 @@ func (o EmailTemplateListItem) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Subject) {
 		toSerialize["subject"] = o.Subject
+	}
+	if !IsNil(o.Body) {
+		toSerialize["body"] = o.Body
 	}
 	if !IsNil(o.Language) {
 		toSerialize["language"] = o.Language
