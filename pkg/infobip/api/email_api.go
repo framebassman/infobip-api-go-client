@@ -6999,3 +6999,209 @@ func (a *EmailAPIService) RemoveEmailTemplateExecute(r ApiRemoveEmailTemplateReq
 	return localVarHTTPResponse, nil
 }
 
+
+type ApiUpdateEmailTemplateRequest struct {
+	ctx         context.Context
+	ApiService  *EmailAPIService
+	id          *int64
+	name        *string
+	from        *string
+	replyTo     *string
+	subject     *string
+	preheader   *string
+	html        *string
+	landingPage *string
+}
+
+func (r ApiUpdateEmailTemplateRequest) ID(id int64) ApiUpdateEmailTemplateRequest {
+	r.id = &id
+	return r
+}
+
+func (r ApiUpdateEmailTemplateRequest) Name(name string) ApiUpdateEmailTemplateRequest {
+	r.name = &name
+	return r
+}
+
+func (r ApiUpdateEmailTemplateRequest) From(from string) ApiUpdateEmailTemplateRequest {
+	r.from = &from
+	return r
+}
+
+func (r ApiUpdateEmailTemplateRequest) ReplyTo(replyTo string) ApiUpdateEmailTemplateRequest {
+	r.replyTo = &replyTo
+	return r
+}
+
+func (r ApiUpdateEmailTemplateRequest) Subject(subject string) ApiUpdateEmailTemplateRequest {
+	r.subject = &subject
+	return r
+}
+
+func (r ApiUpdateEmailTemplateRequest) Preheader(preheader string) ApiUpdateEmailTemplateRequest {
+	r.preheader = &preheader
+	return r
+}
+
+func (r ApiUpdateEmailTemplateRequest) Html(html string) ApiUpdateEmailTemplateRequest {
+	r.html = &html
+	return r
+}
+
+func (r ApiUpdateEmailTemplateRequest) LandingPage(landingPage string) ApiUpdateEmailTemplateRequest {
+	r.landingPage = &landingPage
+	return r
+}
+
+func (r ApiUpdateEmailTemplateRequest) Execute() (*CreateEmailTemplateResponse, *http.Response, error) {
+	return r.ApiService.UpdateEmailTemplateExecute(r)
+}
+
+func (a *EmailAPIService) UpdateEmailTemplate(ctx context.Context) ApiUpdateEmailTemplateRequest {
+	return ApiUpdateEmailTemplateRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+func (a *EmailAPIService) UpdateEmailTemplateExecute(r ApiUpdateEmailTemplateRequest) (*CreateEmailTemplateResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateEmailTemplateResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.UpdateEmailTemplate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/email/1/templates/" + url.PathEscape(parameterValueToString(*r.id, "id"))
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.name == nil {
+		return localVarReturnValue, nil, reportError("name is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"multipart/form-data"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	localVarFormParams.Add("name", *r.name)
+	localVarFormParams.Add("from", *r.from)
+	localVarFormParams.Add("replyTo", *r.replyTo)
+	localVarFormParams.Add("subject", *r.subject)
+	localVarFormParams.Add("preheader", *r.preheader)
+	localVarFormParams.Add("html", *r.html)
+	localVarFormParams.Add("landingPage", *r.landingPage)
+
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["APIKeyHeader"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiException
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiException
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiException
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiException
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
